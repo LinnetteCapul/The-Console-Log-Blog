@@ -1,0 +1,33 @@
+<div class="mb-3">
+  <label for="blog-title" class="form-label">Enter New Title:</label>
+  <input
+    type="email"
+    class="form-control"
+    id="updated-blog-title"
+    placeholder="{{title}}"
+    value="{{title}}"
+  />
+</div>
+<div class="mb-3">
+  <label for="blog-text" class="form-label">Log your thoughts into a blog post:</label>
+  <textarea
+    class="form-control"
+    id="updated-blog-text"
+    rows="3"
+    placeholder="{{text}}"
+  ></textarea>
+</div>
+<button
+  type="button"
+  class="btn btn-primary"
+  data-id="{{id}}"
+  id="updateBlogBtn"
+>Submit</button>
+<button
+  type="button"
+  class="btn btn-danger"
+  data-id="{{id}}"
+  id="deleteBlogBtn"
+>Delete</button>
+
+<script src="/js/edit.js"></script>
