@@ -1,0 +1,45 @@
+<div data-id="{{id}}" class="card custom-card custom-body">
+  <h5 class="card-header custom-header">{{title}}</h5>
+  <div class="">
+    <p class="custom-color custom-space">{{text}}</p>
+    <p class="custom-color custom-space">Posted by
+      {{user.username}}
+  </div>
+</div>
+
+{{#if comments}}
+  {{#each comments as |comment|}}
+    <div class="card comment-card custom-body">
+      <div class="card-body">
+        <blockquote class="blockquote mb-0 custom-color">
+          <p>{{comment.text}}</p>
+          <div class="blockquote-footer custom-color">{{user.name}}
+        </blockquote>
+      </div>
+    </div>
+  {{/each}}
+{{else}}
+  <p>No comments here, you could add one though!</p>
+{{/if}}
+
+<form data-id="{{id}}" class="newcomment">
+  <div class="mb-3">
+    <label
+      for="comment-text"
+      class="form-label custom-space custom-color"
+    >Comment:</label>
+    <input
+      type="text"
+      class="form-control input-space"
+      id="comment-text"
+      aria-describedby="commentinput"
+    />
+  </div>
+  <button
+    type="submit"
+    class="btn custom-color custom-space custom-bg"
+    data-id="{{id}}"
+  >Submit</button>
+</form>
+
+<script src="/js/blog.js"></script>
