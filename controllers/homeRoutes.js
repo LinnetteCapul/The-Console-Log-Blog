@@ -8,16 +8,17 @@ router.get('/', async (req, res) => {
         const blogData = await Blog.findAll({
             include: [
                 {
-                    model: User, 
+                    model: User,
                     attributes: ["username"]
                 }
             ]
         })
-        const blog = blogData.map((blog) => blog.get({ plain: true}));
-    
-        res.render('homepage', { 
+        const blog = blogData.map((blog) => blog.get({ plain: true }));
+
+        res.render('homepage', {
             blog,
-            logged_in : req.session.logged_in
+            logged_in: req.session.logged_in,
+            username: req.session.username,
         });
     } catch (err) {
         res.status(500).json(err)
@@ -27,12 +28,12 @@ router.get('/', async (req, res) => {
 router.get('/blogs/:id', async (req, res) => {
     try {
         const blogData = await Blog.findByPk(req.params.id)
-        
-        const blog = blogData.get({ plain: true});
 
-        res.render('singleblogpage', { 
-            blog, 
-            logged_in : req.session.logged_in
+        const blog = blogData.get({ plain: true });
+
+        res.render('singleblogpage', {
+            blog,
+            logged_in: req.session.logged_in
         });
     } catch (err) {
         res.status(500).json(err)
@@ -43,18 +44,18 @@ router.get('/search/:term', async (req, res) => {
     try {
         const blogData = await Blog.findAll({
             where: {
-              [Op.or]: [
-               {title: { [Op.like]: '%' + req.params.term + '%' }},
-               {user_id: { [Op.like]: '%' + req.params.term + '%' }}
-              ]
+                [Op.or]: [
+                    { title: { [Op.like]: '%' + req.params.term + '%' } },
+                    { user_id: { [Op.like]: '%' + req.params.term + '%' } }
+                ]
             }
-          });
-        
-        const blog = blogData.map((blog) => blog.get({ plain: true}));
+        });
 
-        res.render('blog', { 
-            blog, 
-            logged_in : req.session.logged_in
+        const blog = blogData.map((blog) => blog.get({ plain: true }));
+
+        res.render('blog', {
+            blog,
+            logged_in: req.session.logged_in
         });
     } catch (err) {
         res.status(500).json(err)
@@ -63,8 +64,8 @@ router.get('/search/:term', async (req, res) => {
 
 router.get('/new/blog', withAuth, async (req, res) => {
     try {
-        res.render('newblogpage', { 
-            logged_in : req.session.logged_in
+        res.render('newblogpage', {
+            logged_in: req.session.logged_in
         });
     } catch (err) {
         res.status(500).json(err)
