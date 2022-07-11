@@ -4,7 +4,7 @@ const blogData = require("./blogData.json");
 const userData = require("./userData.json");
 const commentData = require("./commentData.json");
 
-
+//WIP - Comment
 const seedAll = async () => {
     await sequelize.sync({ force: true });
 

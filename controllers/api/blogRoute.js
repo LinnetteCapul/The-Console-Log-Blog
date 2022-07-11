@@ -15,27 +15,6 @@ router.post('/new', withAuth, async (req, res) => {
         console.log(err);
         res.status(400).json(err);
     }
-})
-
-//Delete post route
-router.delete("/:id", withAuth, async (req, res) => {
-    try {
-        const blogData = await Blog.destroy({
-            where: {
-                id: req.params.id,
-            },
-        });
-
-        if (!blogData) {
-            res.status(404).json({ message: "Oh no! No blog found with this id!" });
-            return;
-        }
-
-        res.status(200).json(blogData);
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
 });
 
 //Edit post route
@@ -63,5 +42,28 @@ router.put("/:id", withAuth, async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+//Delete post route
+router.delete("/:id", withAuth, async (req, res) => {
+    try {
+        const blogData = await Blog.destroy({
+            where: {
+                id: req.params.id,
+            },
+        });
+
+        if (!blogData) {
+            res.status(404).json({ message: "Oh no! No blog found with this id!" });
+            return;
+        }
+
+        res.status(200).json(blogData);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+
 
 module.exports = router;
